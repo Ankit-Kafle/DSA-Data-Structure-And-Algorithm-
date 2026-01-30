@@ -1,5 +1,7 @@
 //Linked List is a data structure used to store a collection of elements dynamically. Binary Search is not possible in linkedlist
 
+
+
 //LINKLIST CREATION AND TRAVERSAL
 #include<stdio.h>
 #include<stdlib.h>
@@ -20,6 +22,7 @@ void linkedlistTraversal(struct Node *ptr)
 }
 
 int main(){
+
     struct Node *head;
     struct Node *second;
     struct Node *third;
@@ -45,7 +48,4 @@ int main(){
 
     linkedList Traversal(head);
     return 0;
-
-
-
 }
