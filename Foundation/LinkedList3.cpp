@@ -21,7 +21,35 @@
     int pos;
     int ch;
     
+//Creation of Node in LinkedList
+void create(){
+      while(choice){
+        newnode= (struct node*)malloc(sizeof(struct node));
+        printf("Enter data");
+        scanf("%d",&newnode->data);
+        newnode->next=0;
+
+        if(head==0)
+        {
+            head=temp=newnode;
+        }
+        else{
+            temp->next=newnode;
+            temp=newnode;
+        }
     
+    printf("do you want to continue(0,1)?\n");
+    scanf("%d",&choice);
+    }
+    temp=head;
+    while(temp!=0)
+    {
+        printf("%d\n",temp->data);
+        temp=temp->next;
+     
+    }
+}
+
 //Insertion at begining
 void insbig()
 {
@@ -101,49 +129,25 @@ void display(){
 int main()
 {
  
-    while(choice){
-        newnode= (struct node*)malloc(sizeof(struct node));
-        printf("Enter data");
-        scanf("%d",&newnode->data);
-        newnode->next=0;
-
-        if(head==0)
-        {
-            head=temp=newnode;
-        }
-        else{
-            temp->next=newnode;
-            temp=newnode;
-        }
-    
-    printf("do you want to continue(0,1)?\n");
-    scanf("%d",&choice);
-    }
-    temp=head;
-    while(temp!=0)
-    {
-        printf("%d\n",temp->data);
-        temp=temp->next;
-     
-    }
-    
-    
-    
     do{
 	
-    printf("Enter choice: 1 for Insertion at begining\n  2 for Insertion at ending\n  3 for Insertion at given location\n 4 for Display\n 0 for exist");
+    printf("Enter choice:\n 1 for Creatiom of Nodes\n 2 for Insertion at begining\n  3 for Insertion at ending\n  4 for Insertion at given location\n 5 for Display\n 6 for exist");
     scanf("%d",&ch);
 	switch(ch){
-		case 1:insbig();
+
+    case 1:create();
+    break;
+
+		case 2:insbig();
 		break;
 			
-		case 2:insend();
+		case 3:insend();
 		break;
 		
-		case 3:insGL();
+		case 4:insGL();
 		break;
 		
-			case 4:display();
+		case 5:display();
 		break;
 		
 		case 0:break;
