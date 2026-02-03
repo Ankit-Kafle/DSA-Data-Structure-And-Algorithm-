@@ -131,7 +131,7 @@ int main()
  
     do{
 	
-    printf("Enter choice:\n 1 for Creatiom of Nodes\n 2 for Insertion at begining\n  3 for Insertion at ending\n  4 for Insertion at given location\n 5 for Display\n 6 for exist");
+    printf("Enter choice:\n 1 for Creatiom of Nodes\n 2 for Insertion at begining\n  3 for Insertion at ending\n  4 for Insertion at given location\n 5 for Display\n 6 for exit");
     scanf("%d",&ch);
 	switch(ch){
 
