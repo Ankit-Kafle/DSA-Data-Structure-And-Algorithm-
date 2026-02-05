@@ -15,9 +15,13 @@
     int pos;
     int ch;
     
+    
+    
+    
+    
 //Creation of Node in LinkedList
 void createDLL(){
-    int count=1;
+    int count=0;
     struct node *newnode;
       while(choice){
         newnode= (struct node*)malloc(sizeof(struct node));
@@ -51,40 +55,107 @@ void createDLL(){
     printf("The length or no nodes in this doublyLinkedList is %d ",count);
 }
 
+
+
+
+
 //Insertion at begining
 void insbig()
 {
-    struct node *newnode
+    struct node *newnode;
 	 newnode= (struct node*)malloc(sizeof(struct node));
 	printf("Enter data you want to insert");
 	scanf("%d",&newnode->data);
+    newnode->prev=0;
+    newnode->next=0;
+    head->prev=newnode;
 	newnode->next=head;
 	head=newnode;
 }
 
+
+
+
+
 //Insertion at ending
 void insend(){
+    struct node *newnode;
     newnode = (struct node*)malloc(sizeof(struct node));
-    printf("Enter data you want to insert: ");
+
+    printf("Enter data you want to insert");
     scanf("%d",&newnode->data);
-    newnode->next = NULL;
+
+    newnode->next = NULL;   // ? THIS LINE
+    newnode->prev = NULL;
 
     if(head == NULL){
-        head = newnode;
+        head = tail = newnode;
+    }
+    else{
+        tail->next = newnode;
+        newnode->prev = tail;
+        tail = newnode;
+    }
+}
+
+
+
+
+
+
+//Insertion at given position
+void insertAtPos(){
+    int i = 1, count = 0, pos;
+    struct node *newnode;
+
+    temp = head;
+    while(temp != NULL){
+        count++;
+        temp = temp->next;
+    }
+
+    printf("Enter the position: ");
+    scanf("%d",&pos);
+
+    if(pos > count || pos < 1){
+        printf("Invalid position\n");
+        return;
+    }
+    else if(pos == 1){
+        insbig();
         return;
     }
 
     temp = head;
-    while(temp->next != NULL){
+    newnode = (struct node*)malloc(sizeof(struct node));
+    printf("Enter data: ");
+    scanf("%d",&newnode->data);
+
+    while(i < pos-1){
         temp = temp->next;
+        i++;
     }
+
+    newnode->prev = temp;
+    newnode->next = temp->next;
+
+    if(temp->next != NULL){
+        temp->next->prev = newnode;
+    } else {
+        tail = newnode;   // inserting at end
+    }
+
     temp->next = newnode;
 }
 
 
-//Insertion after a Given Location(GL)
-void insGL(){
-    int i = 1, count = 0;
+
+
+
+
+//Inserting after the given postion
+void insertAfterPos(){
+    int i = 1, count = 0, pos;
     temp = head;
 
     while(temp != NULL){
@@ -95,11 +166,12 @@ void insGL(){
     printf("Enter the position: ");
     scanf("%d",&pos);
 
-    if(pos > count){
+    if(pos > count || pos < 1){
         printf("Invalid position\n");
         return;
     }
 
+    struct node *newnode;
     newnode = (struct node*)malloc(sizeof(struct node));
     printf("Enter data: ");
     scanf("%d",&newnode->data);
@@ -110,9 +182,20 @@ void insGL(){
         i++;
     }
 
+    newnode->prev = temp;
     newnode->next = temp->next;
+
+    if(temp->next != NULL)
+        temp->next->prev = newnode;
+    else
+        tail = newnode;
+
     temp->next = newnode;
 }
+
+
+
+
 
 
 void display(){
@@ -128,12 +211,15 @@ void display(){
 }
 
 
+
+
+
 int main()
 {
  
     do{
 	
-    printf("Enter choice:\n 1 for Creatiom of Nodes\n 2 for Insertion at begining\n  3 for Insertion at ending\n  4 for Insertion at given location\n 5 for Display\n 6 for exit");
+    printf("Enter choice:\n 1 for Creatiom of Nodes\n 2 for Insertion at begining\n  3 for Insertion at ending\n  4 for Insertion at given location\n  5 insertion after the given position\n 6 for Display\n 0 for exit");
     scanf("%d",&ch);
 	switch(ch){
 
@@ -146,10 +232,13 @@ int main()
 		case 3:insend();
 		break;
 		
-		case 4:insGL();
+		case 4:insertAtPos();
 		break;
 		
-		case 5:display();
+        case 5:insertAfterPos();
+        break;
+
+		case 6:display();
 		break;
 		
 		case 0:break;
